@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+		<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+{% endblock %}
+{% block body %}
+
+{% if error is defined %}
+  <div class="alert alert-danger" role="alert">
+    <div class="container">
+      <strong>
+        <p>{{ error	}}</p>
+      </strong>
+    </div>
+  </div>
+{% endif %}
+{% if success is defined %}
+  <div class="alert alert-success" role="alert">
+    <div class="container">
+      <strong>
+        <p>{{ success	}}</p>
+      </strong>
+    </div>
+  </div>
+{% endif %}
+  <form class="row g-3 my-4 mx-auto" action="/forgot" method="post" id="form">
+    <div class="mx-auto col-10 col-md-8 col-lg-6">
+      <div class="col-md-12 my-3">
+        <label for="inputEmail4" class="form-label">Email</label>
+        <input type="email" class="form-control" id="inputEmail4" placeholder="Enter Your Email" name="email">
+      </div>
+      <div class="col-12 mt-4 text-center">
+        <button type="submit" class="btn btn-dark" name="submit">Reset Password</button>
+      </div>
+    </div>
+  </form>
+{% endblock %}

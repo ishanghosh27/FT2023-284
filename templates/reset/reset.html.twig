@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+		<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+{% endblock %}
+{% block body %}
+
+{% if error is defined %}
+  <div class="alert alert-danger" role="alert">
+    <div class="container">
+      <strong>
+        <p>{{ error	}}</p>
+      </strong>
+    </div>
+  </div>
+{% endif %}
+{% if success is defined %}
+  <div class="alert alert-success" role="alert">
+    <div class="container">
+      <strong>
+        <p>{{ success	}}</p>
+      </strong>
+    </div>
+  </div>
+{% endif %}
+  <form class="row g-3 my-4 mx-auto" action="/reset" method="post" id="form">
+    <div class="mx-auto col-10 col-md-8 col-lg-6">
+      <div class="col-md-12 my-3">
+        <label for="inputPassword4" class="form-label">Password</label>
+        <input type="password" class="form-control" id="inputPassword4" placeholder="Enter Your Password" name="pass">
+        <input type="password" class="form-control my-2" id="inputPassword4" placeholder="Re-Enter Your Password" name="repass">
+    </div>
+    <div class="col-12 mt-4 text-center">
+        <button type="submit" class="btn btn-dark" name="submit">Change Password</button>
+      </div>
+  </form>
+{% if success is defined %}
+  <div class="col-12 my-3 text-center">
+			<a href="/" class="link-light link-offset-2 link-underline link-underline-opacity-0">
+				<button type="button" class="btn btn-dark" name="forgot">
+					Log In
+				</button>
+			</a>
+		</div>
+{% endif %}
+{% endblock %}

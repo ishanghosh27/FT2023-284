@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+		<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+{% endblock %}
+{% block body %}
+{% if newUser is defined %}
+		<div class="alert alert-success" role="alert">
+      <div class="container">
+        <strong>
+          New User Successfully Signed Up!
+        </strong>
+      </div>
+    </div>
+{% endif %}
+{% if error is defined %}
+		<div class="alert alert-danger" role="alert">
+      <div class="container">
+        <strong>
+					<p>{{ error	}}</p>
+        </strong>
+      </div>
+    </div>
+{% endif %}
+		<form class="row g-3 my-3 mx-auto" action="/loginUser" method="post" id="login-form">
+			<div class="mx-auto col-10 col-md-8 col-lg-6">
+				<div class="col-auto">
+					<label class="form-label" for="autoSizingInputGroup">Username</label>
+					<div class="input-group">
+						<div class="input-group-text">@</div>
+						<input type="text" class="form-control" id="autoSizingInputGroup" placeholder="Enter Your Username" name="username">
+					</div>
+				</div>
+				<div class="col-md-12 my-3">
+					<label for="inputPassword4" class="form-label">Password</label>
+					<input type="password" class="form-control" id="inputPassword4" placeholder="Enter Your Password" name="pass">
+				</div>
+				<div class="col-12 mt-4 text-center">
+					<button type="submit" class="btn btn-dark" name="submit">Login</button>
+				</div>
+				<div class="col-12 my-3 text-center">
+					<a href="/forgot" class="link-light link-offset-2 link-underline link-underline-opacity-0">
+						<button type="button" class="btn btn-dark" name="forgot">
+							Forgot Password
+						</button>
+					</a>
+				</div>
+			</div>
+		</form>
+		<div class="col-12 my-3 text-center">
+			<p class="my-2">
+			<strong>Don't Have An Account?</strong>
+			</p>
+			<a href="/signup" class="link-light link-offset-2 link-underline link-underline-opacity-0">
+				<button type="button" class="btn btn-dark" name="forgot">
+					Sign Up
+				</button>
+			</a>
+		</div>
+
+{% endblock %}

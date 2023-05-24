@@ -1,0 +1,98 @@
+		{% extends 'base.html.twig' %}
+		{% block stylesheets %}
+		<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+		{% endblock %}
+    {% block body %}
+		{% if existUser is defined %}
+  		<div class="alert alert-danger" role="alert">
+    		<div class="container">
+      		<strong>
+        		<p>{{ existUser	}}</p>
+      		</strong>
+    		</div>
+  		</div>
+		{% endif %}
+    <form class="row g-3 my-3 mx-auto" enctype="multipart/form-data" action="/signupUser" method="post" id="signup-form">
+			<div class="mx-auto col-10 col-md-8 col-lg-6">
+				<div class="col-auto">
+          <label class="form-label" for="specificSizeInputName">Username</label>
+					<label class="visually-hidden" for="autoSizingInputGroup">Username</label>
+					<div class="input-group">
+						<div class="input-group-text">@</div>
+						<input type="text" class="form-control" id="username" placeholder="Enter Your Username" name="username">
+					</div>
+					{% if error.username is defined %}
+					<div class="alert alert-danger my-1 text-danger" role="alert">
+						<p>{{ error.username	}}</p>
+          </div>
+					{% endif %}
+				</div>
+				<div class="row g-3 my-1">
+					<div class="col-sm-6">
+						<label class="form-label" for="specificSizeInputName">First Name</label>
+						<input type="text" class="form-control" id="fname" placeholder="Enter First Name" name="fname">
+					{% if error.fname is defined %}
+					<div class="alert alert-danger my-1 text-danger" role="alert">
+						<p>{{ error.fname	}}</p>
+          </div>
+					{% endif %}
+					</div>
+					<div class="col-sm-6">
+						<label class="form-label" for="specificSizeInputName">Last Name</label>
+						<input type="text" class="form-control" id="lname" placeholder="Enter Last Name" name="lname">
+						{% if error.lname is defined %}
+						<div class="alert alert-danger my-1 text-danger" role="alert">
+							<p>{{ error.lname	}}</p>
+          	</div>
+						{% endif %}
+					</div>
+				</div>
+				<div class="row my-3">
+					<div class="col-sm-12">
+						<label class="form-label" for="autoSizingInputGroup">Phone Number</label>
+						<div class="input-group">
+							<div class="input-group-text">+91</div>
+							<input type="text" class="form-control" id="phone" placeholder="Enter Your Phone Number" name="phone">
+						</div>
+					{% if error.phone is defined %}
+					<div class="alert alert-danger my-1 text-danger" role="alert">
+						<p>{{ error.phone	}}</p>
+          </div>
+					{% endif %}
+					</div>
+				</div>
+				<div class="col-md-12 my-3">
+					<label for="inputEmail4" class="form-label">Email</label>
+					<input type="email" class="form-control" id="email" placeholder="Enter Your Email" name="email">
+					{% if error.email is defined %}
+					<div class="alert alert-danger my-1 text-danger" role="alert">
+						<p>{{ error.email	}}</p>
+          </div>
+					{% endif %}
+				</div>
+				<div class="col-md-12 my-3">
+					<label for="inputPassword4" class="form-label">Password</label>
+					<input type="password" class="form-control" id="inputPassword4" placeholder="Enter Your Password" name="pass">
+					<input type="password" class="form-control my-2" id="inputPassword4" placeholder="Re-Enter Your Password" name="repass">
+					{% if error.pass is defined %}
+					<div class="alert alert-danger my-1 text-danger" role="alert">
+						<p>{{ error.pass	}}</p>
+          </div>
+					{% endif %}
+				</div>
+				<div class="col-12 my-4 text-center">
+					<button type="submit" class="btn btn-dark" name="submit" id="submit">Sign Up</button>
+				</div>
+			</div>
+		</form>
+		<div class="col-12 my-3 text-center">
+			<p class="my-2">
+			<strong>Already Have An Account?</strong>
+			</p>
+			<a href="/" class="link-light link-offset-2 link-underline link-underline-opacity-0">
+				<button type="button" class="btn btn-dark" name="forgot">
+					Log In
+				</button>
+			</a>
+		</div>
+    {% endblock %}
