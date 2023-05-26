@@ -15,58 +15,21 @@
     <div class="card playlist-card my-5 text-white bg-dark">
       <div class="card-body">
         <div class="row text-right">
-          <div class="col-3">
-            <a href="">
-              <div class="card">
-                <img class="card-img-top img-fluid" src="https://picsum.photos/500/400?random=30" alt="Card image cap">
-                <div class="card-body">
-                  <p class="card-text my-0">
-                  <strong>Lorem ipsum</strong>
-                  </p>
-                  <p class="card-text-sm text-end mb-0">Lorem ipsum dolor sit amet.</p>
+          {% for song in songs %}
+            <div class="col-3">
+              <a href="">
+                <div class="card">
+                  <img class="card-img-top img-fluid" src="{{ asset('images/' ~ song.thumbnail) }}" alt="Artist image cap">
+                  <div class="card-body">
+                    <p class="card-text my-0">
+                    <strong>{{ song.title }}</strong>
+                    </p>
+                    <p class="card-text-sm text-end mb-0">{{ song.artist }}</p>
+                  </div>
                 </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-3">
-            <a href="">
-              <div class="card">
-                <img class="card-img-top img-fluid" src="https://picsum.photos/500/400?random=32" alt="Card image cap">
-                <div class="card-body">
-                  <p class="card-text my-0">
-                  <strong>Lorem ipsum</strong>
-                  </p>
-                  <p class="card-text-sm text-end mb-0">Lorem ipsum dolor sit amet.</p>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-3">
-            <a href="">
-              <div class="card">
-                <img class="card-img-top img-fluid" src="https://picsum.photos/500/400?random=34" alt="Card image cap">
-                <div class="card-body">
-                  <p class="card-text my-0">
-                  <strong>Lorem ipsum</strong>
-                  </p>
-                  <p class="card-text-sm text-end mb-0">Lorem ipsum dolor sit amet.</p>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-3">
-            <a href="">
-              <div class="card">
-                <img class="card-img-top img-fluid" src="https://picsum.photos/500/400?random=36" alt="Card image cap">
-                <div class="card-body">
-                  <p class="card-text my-0">
-                  <strong>Lorem ipsum</strong>
-                  </p>
-                  <p class="card-text-sm text-end mb-0">Lorem ipsum dolor sit amet.</p>
-                </div>
-              </div>
-            </a>
-          </div>
+              </a>
+            </div>
+          {% endfor %}
         </div>
       </div>
     </div>

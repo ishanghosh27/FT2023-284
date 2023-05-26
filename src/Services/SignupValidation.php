@@ -174,9 +174,12 @@ class SignupValidation
    *     Returns error message.
    */
   public function validatePhone() {
+    // Checking if input phone number is empty or not.
     if (empty($this->phone)) {
       $this->error['phone'] = "Phone Number Cannot Be Empty";
     }
+    // Checking if input phone number contains 10 digits and is an Indian number
+    // or not.
     elseif (!preg_match('/^[6-9]\d{9}$/', $this->phone)) {
       $this->error['phone'] = "Please Enter A Valid 10 Digit Indian Phone Number";
     }
@@ -190,13 +193,16 @@ class SignupValidation
    *     Returns error message.
    */
   public function validateEmail() {
+    // Checking if input email address is empty or not.
     if (empty($this->email)) {
       $this->error['email'] = "Email ID Cannot Be Empty";
     }
+    // Checking if input email address is of valid format or not.
     elseif (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
       $this->error['email'] = "Invalid Email ID Syntax";
     }
     $userExist = $this->loginValue->findOneBy(['Email' => $this->email]);
+    // Checking if input email address already exists in the database or not.
     if ($userExist) {
       $this->error['email'] = 'User Already Exists. Please Login Or Create New User';
     }
@@ -210,12 +216,15 @@ class SignupValidation
    *     Returns error message.
    */
   public function validatePassword() {
+    // Checking if input passwords is empty or not.
     if (empty($this->pwd) || empty($this->repwd)) {
       $this->error['pass'] = "Password Cannot Be Empty";
     }
+    // Checking if input password fields match or not.
     elseif ($this->pwd <> $this->repwd) {
       $this->error['pass'] = "Passwords Do Not Match";
     }
+    // Checking if input password matches the pattern or not.
     elseif (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])\S{8,}$/', $this->pwd)) {
       $this->error['pass'] = "Password Must Have At Least 1 Lowercase Letter, 1 Uppercase Letter, 1 Digit, 1 Special Character, And Be A Minimum Of 8 Characters Long";
     }

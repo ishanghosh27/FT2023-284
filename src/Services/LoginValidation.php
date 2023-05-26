@@ -53,18 +53,22 @@ class LoginValidation
    *     Returns error message, or 1.
    */
   public function validateLoginForm() {
+    // Checking if the input username is empty or not.
     if (empty($this->userName)) {
       return "Username Cannot Be Empty";
     }
     $userValue = ($this->loginValue->findOneBy(["UserName" => $this->userName]));
+    // Checking if the input username exists in the database or not.
     if (!$userValue) {
       return "Username Not Found";
     }
     $passValue = $userValue->getPassword();
     $passValue = base64_decode($passValue);
+    // Checking if the input password is empty or not.
     if (empty($this->pwd)) {
       return "Password Cannot Be Empty";
     }
+    // Checking if the input password exists in the database or not.
     elseif ($passValue <> $this->pwd) {
       return "Incorrect Password";
     }

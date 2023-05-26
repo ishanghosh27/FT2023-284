@@ -2,20 +2,18 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Songs;
+use App\Entity\Signup;
+use App\Services\SendMail;
+use App\Services\LoginValidation;
+use App\Services\SignupValidation;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Services\SignupValidation;
-use App\Services\LoginValidation;
-use App\Services\SendMail;
-use App\Entity\Signup;
-use App\Entity\Songs;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use getID3 as getID3;
-use getID3_lib as getID3_lib;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * This class handles the input request and stores the data in database. And redirects
@@ -28,6 +26,7 @@ class MainController extends AbstractController
      *     Intiaizes the Entity Manager instance.
      */
     private $em;
+
     /**
      *   @var object
      *     Setting up the repository for the Signup entity using the EntityManager.
@@ -43,7 +42,7 @@ class MainController extends AbstractController
      * This is used to initialize the EntityManagerInterface instance, and Signup repository.
      *
      *   @param EntityManagerInterface $em
-     *     Intiaizes the Entity Manager instance.
+     *     Initializes the Entity Manager instance.
      */
     public function __construct(EntityManagerInterface $em) {
         $this->em = $em;
@@ -112,6 +111,8 @@ class MainController extends AbstractController
         if ($request->get('email')) {
             $email = $request->get('email');
             $userForgot = $this->loginValue->findOneBy(['Email' => $email]);
+            // Checking if the email address corresponding to the username is
+            // present in the database or not.
             if (!$userForgot) {
                 return $this->render('forgot/forgot.html.twig', [
                     'error' => 'Email Address Not Found',
@@ -155,16 +156,19 @@ class MainController extends AbstractController
         }
         $pwd = $request->get("pass");
         $rePwd = $request->get("repass");
+        // Checking if the input password fields are empty or not.
         if (empty($pwd) || empty($rePwd)) {
             return $this->render('reset/reset.html.twig', [
                 'error' => 'Passwords Cannot Be Empty',
             ]);
         }
+        // Checking if the input password fields match or not.
         elseif ($pwd <> $rePwd) {
             return $this->render('reset/reset.html.twig', [
                 'error' => 'Passwords Do Not Match',
             ]);
         }
+        // Checking if the input passwords match the pattern or not.
         elseif (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])\S{8,}$/', $pwd)) {
             return $this->render('reset/reset.html.twig', [
                 'changePassword' => 'Password Must Have At Least 1 Lowercase Letter, 1 Uppercase Letter, 1 Digit, 1 Special Character, And Be A Minimum Of 8 Characters Long',
@@ -204,6 +208,8 @@ class MainController extends AbstractController
         $rePwd = $request->get('repass');
         $validateObject = new SignupValidation($fName, $lName, $uName, $phoneNo, $email, $pwd, $rePwd, $this->loginValue);
         $validateSignup = $validateObject->validateForm();
+        // Checking whether the input values from signup form are valid or not
+        // and return errors, if any.
         if (count($validateSignup)) {
             return $this->render('signup/signup.html.twig', [
                 'error' => $validateSignup,
@@ -239,6 +245,8 @@ class MainController extends AbstractController
         $pass = $request->get('pass');
         $loginValidation = new LoginValidation($uName, $pass, $this->loginValue);
         $loginValidate = $loginValidation->validateLoginForm();
+        // Checking whether the input values from login form are valid or not and
+        // return errors, if any.
         if ($loginValidate <> 1) {
             return $this->render('login/login.html.twig', [
                 "error" => $loginValidate,
@@ -251,7 +259,8 @@ class MainController extends AbstractController
 
     /**
      * This method redirects the user back to the login page, if not logged in.
-     * Otherwise, user is able to login and view the dashboard.
+     * Otherwise, user is able to login and view the dashboard. And all the data
+     * from the Songs database is fetched and sent to the dashboard page.
      *
      *   @Route("/dashboard", name="dashboard")
      *     Redirects user to login page if not logged in.
@@ -267,7 +276,16 @@ class MainController extends AbstractController
      */
     public function dashboard(SessionInterface $si): Response {
         if ($si->get('username')) {
-            return $this->render('dashboard/dashboard.html.twig');
+            $song = $this->em->getRepository(Songs::class)->findAll();
+            $songPath = $this->getParameter('kernel.project_dir') . '/public/audio/';
+            $actualSong = [];
+            foreach ($song as $songItem) {
+                $actualSong[$songItem->getTitle()] = $songPath . $songItem->getTitle() . '.mp3';
+            }
+            return $this->render('dashboard/dashboard.html.twig', [
+                'songs' => $song,
+                'play' => $actualSong,
+            ]);
         }
         return $this->redirectToRoute(' ');
     }
@@ -367,6 +385,8 @@ class MainController extends AbstractController
         $rePwd = $request->get('repass');
         $validateProfile = new SignupValidation($fName, $lName, ' ', $phoneNo, ' ', $pwd, $rePwd, $this->loginValue);
         $validateSignup = $validateProfile->validateProfile();
+        // Checking whether the input values from edit profile form are valid or
+        // not and return errors, if any.
         if (count($validateSignup)) {
             return $this->render('profile/profileEdit.html.twig', [
                 'error' => $validateSignup,
@@ -432,10 +452,10 @@ class MainController extends AbstractController
         $path = $this->getParameter('kernel.project_dir').'/public/audio';
         $file->move($path, $name);
         $uploadSong = new Songs();
-        $uploadSong->setTitle($name);
+        $uploadSong->setTitle(str_replace('.mp3', '', $name));
         $uploadSong->setArtist($artist);
         $uploadSong->setUploadedBy($si->get('username'));
-        $uploadSong->setThumbnail($thumb);
+        $uploadSong->setThumbnail($thumb->getClientOriginalName());
         $this->em->persist($uploadSong);
         $this->em->flush();
         return $this->render('upload/upload.html.twig',[
@@ -458,7 +478,35 @@ class MainController extends AbstractController
      *     The response object representing the playlist page is returned.
      */
     public function playlist(Request $request, SessionInterface $si): Response {
-        return $this->render('playlist/playlist.html.twig');
+        $playlistUser = $this->em->getRepository(Songs::class)->findOneBy(['uploadedBy' => $si->get('username')]);
+        $uploadedBy = $playlistUser->getUploadedBy();
+        if (($si->get('username')) == $uploadedBy) {
+            $uploadedSong = $this->em->getRepository(Songs::class)->findAll();
+            return $this->render('playlist/playlist.html.twig', [
+                'songs' => $uploadedSong,
+            ]);
+        }
+        return $this->render('dashboard/dashboard.html.twig', [
+            'uploads' => 'You Have Not Uploaded Any Songs',
+        ]);
+    }
+
+    /**
+     * This method redirects to playlist page.
+     *
+     *   @Route("/likedSongs", name="likedSongs")
+     *     Redirects to Liked page.
+     *
+     *   @param object $request
+     *     Stores the object of Request class.
+     *   @param object $si
+     *     Stores the object of SessionInterface class.
+     *
+     *   @return Response
+     *     The response object representing the playlist page is returned.
+     */
+    public function likedSongs(Request $request, SessionInterface $si): Response {
+        return $this->render('liked/liked.html.twig');
     }
 
 }

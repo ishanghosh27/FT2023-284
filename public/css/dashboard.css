@@ -65,7 +65,7 @@ hr {
 	background-size: 500% 500%;
 	animation: gradient 30s ease infinite;
   padding: 10px;
-  /* display: none; */
+  display: none;
 }
 
 @keyframes gradient {
@@ -139,4 +139,17 @@ hr {
 .copyright span {
   font-size: 0.8rem;
   font-weight: 800;
+}
+
+.fSong:hover{
+	color: #dc3545;
+}
+
+.dright-artist-box .like-songs {
+  color: #212529;
+}
+
+.dright-artist-box .like-songs:hover {
+  color: #dc3545;
+  z-index: 5;
 }

@@ -3,13 +3,16 @@
 <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 {% endblock %}
+{% block javascripts %}
+
+{% endblock %}
 {% block body %}
 <div class="login-logo text-center my-5 mx-auto">
 	<a href="">
 		<i class="fa-brands fa-spotify fa-flip-vertical fa-3xl"></i>
 	</a>
 </div>
-<div class="card signup-card my-5 text-white bg-dark">
+<div class="card signup-card my-5 text-white bg-dark" id="submitForm">
 	<div class="card-body">
 		<form class="row g-3 my-3 mx-auto" enctype="multipart/form-data" action="/signupUser" method="post" id="signup-form">
 			<div class="mx-auto col-10">
@@ -25,7 +28,7 @@
 					</div>
 					{% endif %}
 				</div>
-				<div class="row g-3 my-1 mx-auto">
+				<div class="row g-3 my-3 mx-auto">
 					<div class="col-sm-6">
 						<label class="form-label" for="specificSizeInputName">First Name</label>
 						<input type="text" class="form-control" id="fname" placeholder="Enter First Name" name="fname">

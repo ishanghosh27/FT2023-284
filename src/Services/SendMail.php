@@ -56,10 +56,12 @@ class SendMail
       $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
       $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
       //Recipients
+      // This contains the sender and receiver's email addresses.
       $mail->setFrom('ghosh.ishan.27@gmail.com', 'Ishan Ghosh');
       $mail->addAddress($this->email, 'Recipient User');     //Add a recipient
       //Content
       $mail->isHTML(true);                                  //Set email format to HTML
+      // This contains the subject and the body of the email message.
       $mail->Subject = "Reset MySQL One Password";
       $mail->Body    = "Link To Reset Password - " . $_SERVER['HTTP_HOST'] . '/reset?mail=' . base64_encode($this->email);
       $mail->send();
