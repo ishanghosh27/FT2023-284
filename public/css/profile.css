@@ -1,0 +1,38 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-image: url('../images/y-so-serious-white.png');
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+p {
+  margin: 0;
+}
+
+.login-card {
+  margin: 0 20rem;
+}
+
+.signup-card {
+  margin: 0 10rem;
+}
+
+.bottom-card {
+  margin: 0 35rem;
+}
+
+i {
+  color: #212529;
+}
+
+i:hover {
+  color: #dc3545;
+  transition: 0.1s ease;
+}
+
+.fa-3xl {
+  font-size: 7rem;
+}

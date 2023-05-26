@@ -107,6 +107,21 @@ class SignupValidation
   }
 
   /**
+   * This method calls the validations of First & Last Name, Phone Number and
+   * Password. And returns error, if any.
+   *
+   *   @return mixed
+   *     Returns error from first and last name, phone number and password fields,
+   *     if any.
+   */
+  public function validateProfile() {
+    $this->validateName();
+    $this->validatePhone();
+    $this->validatePassword();
+    return $this->error;
+  }
+
+  /**
    * This method validates the input value of the username field and returns error
    * message, if any.
    *
@@ -114,9 +129,11 @@ class SignupValidation
    *     Returns error message.
    */
   public function validateUsername() {
+    // Checking if input username is empty or not.
     if (empty($this->userName)) {
       $this->error['username'] = "Username Cannot Be Empty";
     }
+    // Checking if input username matches the specified pattern or not.
     elseif (!preg_match('/^[a-zA-Z0-9_]{3,20}$/', $this->userName)) {
         $this->error['username'] = "Invalid Username Format";
       }
@@ -131,15 +148,19 @@ class SignupValidation
    */
   public function validateName()
   {
+    // Checking if input first name is empty or not.
     if (empty($this->fName)) {
       $this->error['fname'] = "First Name Cannot Be Empty";
     }
+    // Checking if input first name contains only alphabets or not.
     elseif ((!preg_match("/^[a-zA-Z-']*$/", $this->fName))) {
       $this->error['fname'] = "First Name Can Only Contain Alphabets";
     }
+    // Checking if input last name is empty or not.
     if (empty($this->lName)) {
       $this->error['lname'] = "Last Name Cannot Be Empty";
     }
+    // Checking if input last name contains only alphabets or not.
     elseif ((!preg_match("/^[a-zA-Z-']*$/", $this->lName))) {
       $this->error['lname'] = "Last Name Can Only Contain Alphabets";
     }

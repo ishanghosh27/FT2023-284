@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/profile.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock %}
+{% block body %}
+<div class="login-logo text-center my-5 mx-auto">
+  <a href="/dashboard">
+    <i class="fa-brands fa-spotify fa-flip-vertical fa-3xl"></i>
+  </a>
+</div>
+<div class="card signup-card my-5 text-white bg-dark">
+  <div class="card-body">
+  <strong>
+    <form class="row g-3 my-3 mx-auto" enctype="multipart/form-data" action="/profile" method="post" id="signup-form">
+      <div class="mx-auto col-10">
+        <div class="col-auto">
+          <label class="visually-hidden" for="autoSizingInputGroup">Username</label>
+          <div class="input-group">
+            <div class="input-group-text">@</div>
+            <input type="text" class="form-control" id="username" placeholder="{{ profileData.username }}" name="username" disabled>
+          </div>
+        </div>
+        <div class="row g-3 my-3 mx-auto">
+          <div class="col-12">
+            <label class="form-label" for="specificSizeInputName">Full Name</label>
+            <input type="text" class="form-control" id="fullname" placeholder="{{ profileData.fname }} {{ profileData.lname }}" name="fullname" disabled>
+          </div>
+        </div>
+        <div class="row my-3 mx-auto">
+          <div class="col-sm-12">
+            <label class="form-label" for="autoSizingInputGroup">Phone Number</label>
+            <div class="input-group">
+              <div class="input-group-text">+91</div>
+              <input type="text" class="form-control" id="phone" placeholder="{{ profileData.phone }}" name="phone">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 my-3">
+          <label for="inputEmail4" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" placeholder="{{profileData.email}}" name="email" disabled>
+        </div>
+        <div class="col-12 mt-4 mb-0 text-center">
+          <button type="submit" class="btn btn-light btn-lg" name="submit" id="submit">Edit Details</button>
+        </div>
+      </div>
+    </form>
+  </strong>
+</div>
+{% endblock %}

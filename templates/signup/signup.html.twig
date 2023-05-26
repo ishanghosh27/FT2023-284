@@ -1,22 +1,20 @@
-		{% extends 'base.html.twig' %}
-		{% block stylesheets %}
-		<link rel="stylesheet" href="{{ asset('css/style.css') }}">
-		{% endblock %}
-    {% block body %}
-		{% if existUser is defined %}
-  		<div class="alert alert-danger" role="alert">
-    		<div class="container">
-      		<strong>
-        		<p>{{ existUser	}}</p>
-      		</strong>
-    		</div>
-  		</div>
-		{% endif %}
-    <form class="row g-3 my-3 mx-auto" enctype="multipart/form-data" action="/signupUser" method="post" id="signup-form">
-			<div class="mx-auto col-10 col-md-8 col-lg-6">
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock %}
+{% block body %}
+<div class="login-logo text-center my-5 mx-auto">
+	<a href="">
+		<i class="fa-brands fa-spotify fa-flip-vertical fa-3xl"></i>
+	</a>
+</div>
+<div class="card signup-card my-5 text-white bg-dark">
+	<div class="card-body">
+		<form class="row g-3 my-3 mx-auto" enctype="multipart/form-data" action="/signupUser" method="post" id="signup-form">
+			<div class="mx-auto col-10">
 				<div class="col-auto">
-          <label class="form-label" for="specificSizeInputName">Username</label>
-					<label class="visually-hidden" for="autoSizingInputGroup">Username</label>
+					<label class="form-label" for="specificSizeInputName">Username</label>
 					<div class="input-group">
 						<div class="input-group-text">@</div>
 						<input type="text" class="form-control" id="username" placeholder="Enter Your Username" name="username">
@@ -24,17 +22,17 @@
 					{% if error.username is defined %}
 					<div class="alert alert-danger my-1 text-danger" role="alert">
 						<p>{{ error.username	}}</p>
-          </div>
+					</div>
 					{% endif %}
 				</div>
-				<div class="row g-3 my-1">
+				<div class="row g-3 my-1 mx-auto">
 					<div class="col-sm-6">
 						<label class="form-label" for="specificSizeInputName">First Name</label>
 						<input type="text" class="form-control" id="fname" placeholder="Enter First Name" name="fname">
 					{% if error.fname is defined %}
 					<div class="alert alert-danger my-1 text-danger" role="alert">
 						<p>{{ error.fname	}}</p>
-          </div>
+					</div>
 					{% endif %}
 					</div>
 					<div class="col-sm-6">
@@ -43,11 +41,11 @@
 						{% if error.lname is defined %}
 						<div class="alert alert-danger my-1 text-danger" role="alert">
 							<p>{{ error.lname	}}</p>
-          	</div>
+						</div>
 						{% endif %}
 					</div>
 				</div>
-				<div class="row my-3">
+				<div class="row my-3 mx-auto">
 					<div class="col-sm-12">
 						<label class="form-label" for="autoSizingInputGroup">Phone Number</label>
 						<div class="input-group">
@@ -57,7 +55,7 @@
 					{% if error.phone is defined %}
 					<div class="alert alert-danger my-1 text-danger" role="alert">
 						<p>{{ error.phone	}}</p>
-          </div>
+					</div>
 					{% endif %}
 					</div>
 				</div>
@@ -67,7 +65,7 @@
 					{% if error.email is defined %}
 					<div class="alert alert-danger my-1 text-danger" role="alert">
 						<p>{{ error.email	}}</p>
-          </div>
+					</div>
 					{% endif %}
 				</div>
 				<div class="col-md-12 my-3">
@@ -77,22 +75,28 @@
 					{% if error.pass is defined %}
 					<div class="alert alert-danger my-1 text-danger" role="alert">
 						<p>{{ error.pass	}}</p>
-          </div>
+					</div>
 					{% endif %}
 				</div>
-				<div class="col-12 my-4 text-center">
-					<button type="submit" class="btn btn-dark" name="submit" id="submit">Sign Up</button>
+				<div class="col-12 mt-4 mb-0 text-center">
+					<button type="submit" class="btn btn-light btn-lg" name="submit" id="submit">Sign Up</button>
 				</div>
 			</div>
 		</form>
+	</div>
+</div>
+<div class="card bottom-card my-5 text-white bg-dark">
+	<div class="card-body">
 		<div class="col-12 my-3 text-center">
 			<p class="my-2">
 			<strong>Already Have An Account?</strong>
 			</p>
 			<a href="/" class="link-light link-offset-2 link-underline link-underline-opacity-0">
-				<button type="button" class="btn btn-dark" name="forgot">
+				<button type="button" class="btn btn-light" name="forgot">
 					Log In
 				</button>
 			</a>
 		</div>
-    {% endblock %}
+	</div>
+</div>
+{% endblock %}

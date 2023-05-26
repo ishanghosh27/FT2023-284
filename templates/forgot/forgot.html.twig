@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
-		<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 {% endblock %}
 {% block body %}
-
 {% if error is defined %}
   <div class="alert alert-danger" role="alert">
     <div class="container">
@@ -22,15 +22,24 @@
     </div>
   </div>
 {% endif %}
-  <form class="row g-3 my-4 mx-auto" action="/forgot" method="post" id="form">
-    <div class="mx-auto col-10 col-md-8 col-lg-6">
-      <div class="col-md-12 my-3">
-        <label for="inputEmail4" class="form-label">Email</label>
-        <input type="email" class="form-control" id="inputEmail4" placeholder="Enter Your Email" name="email">
-      </div>
-      <div class="col-12 mt-4 text-center">
-        <button type="submit" class="btn btn-dark" name="submit">Reset Password</button>
-      </div>
+  <div class="login-logo text-center my-5 mx-auto">
+    <a href="/">
+      <i class="fa-brands fa-spotify fa-flip-vertical fa-3xl"></i>
+    </a>
+  </div>
+  <div class="card signup-card my-5 text-white bg-dark">
+	  <div class="card-body">
+      <form class="row g-3 my-4 mx-auto" action="/forgot" method="post" id="form">
+        <div class="mx-auto col-10">
+          <div class="col-md-12 my-3">
+            <label for="inputEmail4" class="form-label">Email</label>
+            <input type="email" class="form-control" id="inputEmail4" placeholder="Enter Your Email" name="email">
+          </div>
+          <div class="col-12 mt-4 text-center">
+            <button type="submit" class="btn btn-light" name="submit">Reset Password</button>
+          </div>
+        </div>
+      </form>
     </div>
-  </form>
+  </div>
 {% endblock %}

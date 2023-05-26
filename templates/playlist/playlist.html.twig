@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock %}
+{% block body %}
+<div class="login-logo text-center mt-5 mb-3 mx-auto">
+  <a href="/dashboard">
+    <i class="fa-brands fa-spotify fa-flip-vertical fa-3xl"></i>
+  </a>
+</div>
+<div class="container-fluid">
+  <div class="row">
+  <div class="col-12">
+    <div class="card playlist-card my-5 text-white bg-dark">
+      <div class="card-body">
+        <div class="row text-right">
+          <div class="col-3">
+            <a href="">
+              <div class="card">
+                <img class="card-img-top img-fluid" src="https://picsum.photos/500/400?random=30" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text my-0">
+                  <strong>Lorem ipsum</strong>
+                  </p>
+                  <p class="card-text-sm text-end mb-0">Lorem ipsum dolor sit amet.</p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-3">
+            <a href="">
+              <div class="card">
+                <img class="card-img-top img-fluid" src="https://picsum.photos/500/400?random=32" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text my-0">
+                  <strong>Lorem ipsum</strong>
+                  </p>
+                  <p class="card-text-sm text-end mb-0">Lorem ipsum dolor sit amet.</p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-3">
+            <a href="">
+              <div class="card">
+                <img class="card-img-top img-fluid" src="https://picsum.photos/500/400?random=34" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text my-0">
+                  <strong>Lorem ipsum</strong>
+                  </p>
+                  <p class="card-text-sm text-end mb-0">Lorem ipsum dolor sit amet.</p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-3">
+            <a href="">
+              <div class="card">
+                <img class="card-img-top img-fluid" src="https://picsum.photos/500/400?random=36" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text my-0">
+                  <strong>Lorem ipsum</strong>
+                  </p>
+                  <p class="card-text-sm text-end mb-0">Lorem ipsum dolor sit amet.</p>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
