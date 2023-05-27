@@ -171,29 +171,31 @@
               <div class="dright-artist-box mt-5 mb-2">
                 <div class="row text-right">
                 {% if songs is defined %}
-                {% for song in songs %}
-                  <div class="col-3 my-3">
-                    <a href="" class="fSong">
-                      <div class="card main-song-card">
-                        <img class="card-img-top img-fluid" src="{{ asset('images/' ~ song.thumbnail) }}" alt="Card image cap">
-                        <div class="card-body">
-                          <div class="row align-items-center">
-                            <div class="col-2">
-                              <a href="">
-                                <i class="fa-solid fa-heart fa-xl like-songs"></i>
-                              </a>
-                            </div>
-                            <div class="col-10 song-details">
-                              <p class="card-text my-0">
-                                <strong id="song-name">{{ song.title }}</strong>
-                              </p>
-                              <p class="card-text-sm text-end mb-0">{{ song.artist }}</p>
+                  {% for song in songs %}
+                    <div class="col-3 my-3">
+                      <a href="" class="fSong">
+                        <div class="card main-song-card">
+                          <img class="card-img-top img-fluid" src="{{ asset('images/' ~ song.thumbnail) }}"     alt="Card image cap">
+                          <div class="card-body">
+                            <div class="row align-items-center">
+                              <div class="col-2">
+                                {# <a href=""> #}
+                                  <i class="fa-solid fa-heart fa-xl like-songs"></i>
+                                {# </a> #}
+                              </div>
+                              <div class="col-10 song-details">
+                                {# <a href="" class="fSong"> #}
+                                  <p class="card-text my-0">
+                                    <strong id="song-name">{{ song.title }}</strong>
+                                  </p>
+                                  <p class="card-text-sm text-end mb-0">{{ song.artist }}</p>
+                                {# </a> #}
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </a>
-                  </div>
+                      </a>
+                    </div>
                   {% endfor %}
                 {% endif %}
                 </div>
