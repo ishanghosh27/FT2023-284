@@ -184,12 +184,10 @@
                                 {# </a> #}
                               </div>
                               <div class="col-10 song-details">
-                                {# <a href="" class="fSong"> #}
-                                  <p class="card-text my-0">
-                                    <strong id="song-name">{{ song.title }}</strong>
-                                  </p>
-                                  <p class="card-text-sm text-end mb-0">{{ song.artist }}</p>
-                                {# </a> #}
+                                <p class="card-text my-0">
+                                  <strong id="song-name">{{ song.title }}</strong>
+                                </p>
+                                <p class="card-text-sm text-end mb-0">{{ song.artist }}</p>
                               </div>
                             </div>
                           </div>
@@ -208,7 +206,10 @@
   </div>
   <div id="player-container">
     <div class="row align-items-center">
-      <div class="col-3">
+      <div class="col-1 text-center px-0 py-0">
+        <i class="fa-solid fa-xmark fa-2xl"></i>
+      </div>
+      <div class="col-3 text-start px-0 py-0">
         <div id="song-info">
           <img src="" alt="Song Cover">
           <div id="song-details">
@@ -219,7 +220,7 @@
           </div>
         </div>
       </div>
-      <div class="col-9">
+      <div class="col-8">
         <div class="song-buttons">
           <input type="range" id="progress-bar" min="0" max="100" value="0">
           <div id="controls">

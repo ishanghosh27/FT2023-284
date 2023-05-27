@@ -1,43 +1,9 @@
-
-// function playSong(id) {
-//   event.preventDefault();
-//   $("#player-container").css("display", "block");
-//   $("#audio-player").attr("src", "../audio/DIL-NU.mp3");
-//   $("#audio-player")[0].play();
-//   // $.ajax({
-//   //   type: 'POST',
-//   //   url: '/playSong',
-//   //   data:
-//   //   {
-//   //       commentid: id
-//   //   },
-//   //   dataType: "text",
-//   //   success: function(response) {
-//   //       console.log(response);
-//   //   },
-//   //   error: function(error) {
-//   //       console.log(error);
-//   //   }
-//   // });
-// }
-
-
-// $(document).ready(function() {
-//   $(".fSong").click(function (event) { // Add the 'event' parameter here
-//     event.preventDefault();
-
-//     console.log(a);
-//     $("#player-container").css("display", "block");
-//     $("#audio-player").attr("src", "../public/audio/" + a + ".mp3");
-//     $("#audio-player")[0].play();
-//     $("#play-button").html('<i class="fa-solid fa-pause fa-2xl"></i>');
-//   });
-// });
+// When album art of the song is clicked, music player appears, and starts playing
+// the song.
 
 $(document).ready(function() {
   $(".fSong").click(function(event) {
     event.preventDefault();
-    debugger;
     var songTitle = $(this).find("#song-name").text();
     console.log("songTitle:", songTitle);
     var songArtist = $(this).find(".card-text-sm").text();
@@ -54,6 +20,20 @@ $(document).ready(function() {
     $("#audio-player").attr("src", songMp3);
     $("#audio-player")[0].play();
     $("#play-button").html('<i class="fa-solid fa-pause fa-2xl"></i>');
+  });
+});
+
+// When user clicks the 'x' button, music stops and the music player dissapears.
+
+$(document).ready(function() {
+  // Event listener for the "X" button
+  $(".fa-xmark").click(function() {
+    // Hide the player container
+    $("#player-container").css("display", "none");
+    // Stop the audio playback
+    $("#audio-player")[0].pause();
+    $("#play-button").html('<i class="fa-solid fa-play fa-2xl"></i>');
+    $("#audio-player")[0].currentTime = 0;
   });
 });
 
