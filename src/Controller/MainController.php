@@ -479,15 +479,14 @@ class MainController extends AbstractController
      */
     public function playlist(Request $request, SessionInterface $si): Response {
         $playlistUser = $this->em->getRepository(Songs::class)->findOneBy(['uploadedBy' => $si->get('username')]);
-        $uploadedBy = $playlistUser->getUploadedBy();
-        if (($si->get('username')) == $uploadedBy) {
-            $uploadedSong = $this->em->getRepository(Songs::class)->findAll();
+        if ((($playlistUser <> NULL) && ($si->get('username')) == $playlistUser->getUploadedBy())) {
+            $uploadedSong = $this->em->getRepository(Songs::class)->findBy(['uploadedBy' => $si->get('username')]);
             return $this->render('playlist/playlist.html.twig', [
                 'songs' => $uploadedSong,
             ]);
         }
-        return $this->render('dashboard/dashboard.html.twig', [
-            'uploads' => 'You Have Not Uploaded Any Songs',
+        return $this->render('upload/upload.html.twig', [
+            'uploads' => 'You Have Not Uploaded Any Songs! Please Upload A Song From Here!',
         ]);
     }
 

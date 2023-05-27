@@ -141,8 +141,13 @@ hr {
   font-weight: 800;
 }
 
-.fSong:hover{
-	color: #dc3545;
+.main-song-card:hover {
+  transform: scale(1.05);
+  transition: 0.2s ease;
+}
+
+.main-song-card:hover .song-details{
+  color: #dc3545;
 }
 
 .dright-artist-box .like-songs {
@@ -152,4 +157,8 @@ hr {
 .dright-artist-box .like-songs:hover {
   color: #dc3545;
   z-index: 5;
+}
+
+.song-details {
+  color: #212529;
 }

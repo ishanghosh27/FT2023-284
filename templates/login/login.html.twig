@@ -3,6 +3,10 @@
 		<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 {% endblock %}
+{% block javascripts %}
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src="{{ asset('js/formData.js') }}"></script>
+{% endblock %}
 {% block body %}
 {% if newUser is defined %}
 		<div class="alert alert-success" role="alert">
@@ -23,7 +27,7 @@
     </div>
 {% endif %}
 <div class="login-logo text-center my-5 mx-auto">
-	<a href="">
+	<a href="/">
 		<i class="fa-brands fa-spotify fa-flip-vertical fa-3xl"></i>
 	</a>
 </div>

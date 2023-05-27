@@ -5,6 +5,7 @@ $(document).ready(function() {
   var progressBar = document.getElementById('progress-bar');
   playButton.addEventListener('click', togglePlay);
   progressBar.addEventListener('input', updateProgress);
+
   function togglePlay() {
     if (audioPlayer.paused) {
       audioPlayer.play();
@@ -14,12 +15,14 @@ $(document).ready(function() {
       playButton.innerHTML = '<i class="fa-solid fa-play fa-2xl"></i>';
     }
   }
+
   function updateProgress() {
     var progress = progressBar.value;
     var duration = audioPlayer.duration;
     var currentTime = (progress / 100) * duration;
     audioPlayer.currentTime = currentTime;
   }
+
   // Update progress bar as the audio plays
   audioPlayer.addEventListener('timeupdate', function() {
     var currentTime = audioPlayer.currentTime;
@@ -27,12 +30,9 @@ $(document).ready(function() {
     var progress = (currentTime / duration) * 100;
     progressBar.value = progress;
   });
+
   // Update play/pause button when audio playback ends
   audioPlayer.addEventListener('ended', function() {
     playButton.innerHTML = '<i class="fa-solid fa-play fa-2xl"></i>';
   });
 });
-
-
-
-
