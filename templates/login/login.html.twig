@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+		<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock %}
+{% block javascripts %}
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src="{{ asset('js/formData.js') }}"></script>
+{% endblock %}
+{% block body %}
+{% if newUser is defined %}
+		<div class="alert alert-success" role="alert">
+      <div class="container">
+        <strong>
+          New User Successfully Signed Up!
+        </strong>
+      </div>
+    </div>
+{% endif %}
+{% if error is defined %}
+		<div class="alert alert-danger" role="alert">
+      <div class="container">
+        <strong>
+					<p>{{ error	}}</p>
+        </strong>
+      </div>
+    </div>
+{% endif %}
+<div class="login-logo text-center my-5 mx-auto">
+	<a href="/">
+		<i class="fa-brands fa-spotify fa-flip-vertical fa-3xl"></i>
+	</a>
+</div>
+<div class="card login-card my-5 text-white bg-dark">
+	<div class="card-body">
+		<form class="row g-3 my-3 mx-auto" action="/loginUser" method="post" id="login-form">
+			<div class="mx-auto col-10">
+				<div class="col-auto">
+					<label class="form-label" for="autoSizingInputGroup">Username</label>
+					<div class="input-group">
+						<div class="input-group-text">@</div>
+						<input type="text" class="form-control" id="autoSizingInputGroup" placeholder="Enter Your Username" name="username">
+					</div>
+				</div>
+				<div class="col-md-12 my-3">
+					<label for="inputPassword4" class="form-label">Password</label>
+					<input type="password" class="form-control" id="inputPassword4" placeholder="Enter Your Password" name="pass">
+				</div>
+				<div class="col-12 my-4 text-center">
+					<button type="submit" class="btn btn-light btn-lg" name="submit">Login</button>
+				</div>
+				<div class="col-12 mt-4 mb-3 text-center">
+					<a href="/forgot" class="link-light link-offset-2 link-underline link-underline-opacity-0">
+						<button type="button" class="btn btn-light" name="forgot">
+							Forgot Password
+						</button>
+					</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<div class="card bottom-card my-5 text-white bg-dark">
+	<div class="card-body">
+		<div class="col-12 my-3 text-center">
+			<p class="my-2">
+			<strong>Don't Have An Account?</strong>
+			</p>
+			<a href="/signup" class="link-light link-offset-2 link-underline link-underline-opacity-0">
+				<button type="button" class="btn btn-light" name="forgot">
+					Sign Up
+				</button>
+			</a>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

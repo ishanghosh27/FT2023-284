@@ -1,0 +1,237 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock %}
+{% block javascripts %}
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+  <script src="{{ asset('js/script.js') }}"></script>
+  <script src="{{ asset('js/playSong.js') }}"></script>
+{% endblock %}
+{% block body %}
+<div class="container-fluid">
+    <div class="row my-1">
+      <div class="col-3 px-1 long-nav">
+        <div class="card text-white bg-dark">
+          <div class="card-body">
+            <div class="dash-logo text-center mt-3 mb-5">
+              <a href="">
+                <i class="fa-brands fa-spotify fa-flip-vertical fa-3xl"></i>
+              </a>
+            </div>
+            <div class="dleft">
+              <div class="home my-4">
+                <a href="" id="unchanged-anchor">
+                  <div class="home-link">
+                    <div class="row">
+                      <div class="col-2 text-end">
+                        <i class="fa-solid fa-house fa-xl"></i>
+                      </div>
+                      <div class="col-10 text-start">
+                        <strong class="dleft-txt">Home</strong>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="playlist my-4">
+                <a href="" id="unchanged-anchor">
+                  <div class="playlist-link">
+                    <div class="row">
+                      <div class="col-2 text-end">
+                        <i class="fa-solid fa-music fa-xl"></i>
+                      </div>
+                      <div class="col-10">
+                        <strong class="dleft-txt">Playlists</strong>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="trending">
+                <a href="" id="unchanged-anchor">
+                  <div class="trending-link my-4">
+                    <div class="row">
+                      <div class="col-2 text-end">
+                        <i class="fa-solid fa-magnifying-glass fa-xl"></i>
+                      </div>
+                      <div class="col-10">
+                        <strong class="dfleft-txt">Trending</strong>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <hr class="my-4">
+            <div class="dleft-profile mt-4 mb-5">
+              <a href="/mainProfile">
+                <div class="profile-link">
+                  <di class="row">
+                    <div class="col-2 text-end">
+                      <i class="fa-solid fa-user fa-2xl"></i>
+                    </div>
+                    <div class="col-10">
+                      <strong class="dleft-txt-b">My Profile</strong>
+                    </div>
+                  </di>
+                </div>
+              </a>
+            </div>
+            <div class="dleft-bookmark mt-4 mb-5">
+              <a href="/playlist">
+                <div class="bookmark-link">
+                  <div class="row">
+                    <div class="col-2 text-end">
+                      <i class="fa-solid fa-bookmark fa-2xl"></i>
+                    </div>
+                    <div class="col-10">
+                      <strong class="dleft-txt-b">My Uploads</strong>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="dleft-heart mt-4 mb-3">
+              <a href="/likedSongs">
+                <div class="heart-link">
+                  <div class="row">
+                    <div class="col-2 text-end">
+                      <i class="fa-solid fa-heart fa-2xl"></i>
+                    </div>
+                    <div class="col-10">
+                      <strong class="dleft-txt-b">My Favourties</strong>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="copyright">
+            <div class="row text-center">
+              <div class="col-12 my-3">
+                <span class="lead">
+                  <strong>
+                    Copyright © 2023 Dotify AB. No rights reserved.
+                  </strong>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-9 px-1">
+        <div class="card text-white bg-dark">
+          <div class="card-body">
+            <div class="dright">
+              <div class="dright-nav">
+                <div class="row d-flex align-items-center">
+                  <div class="col-4">
+                    <div class="row">
+                      <div class="col-3">
+                        <div class="logout-button">
+                          <a href="/logout">
+                            <button type="button" class="btn btn-light btn-sm">Log Out</button>
+                          </a>
+                        </div>
+                      </div>
+                      <div class="col-9 text-start">
+                        <div class="upload-button">
+                          <a href="/upload">
+                            <button type="button" class="btn btn-light btn-sm">Upload</button>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-8">
+                    <div class="search-bar">
+                      <div class="form-search">
+                        <input type="text" class="form-control form-input" placeholder="Search">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="dright-artist mt-5 mb-3">
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <img class="d-block w-100 img-fluid carousel-img border border-white" src="https://picsum.photos/1500/600?random=1" alt="First Artist">
+                    </div>
+                    <div class="carousel-item">
+                      <img class="d-block w-100 img-fluid carousel-img border border-white" src="https://picsum.photos/1500/600?random=2" alt="Second Artist">
+                    </div>
+                    <div class="carousel-item">
+                      <img class="d-block w-100 img-fluid carousel-img border border-white" src="https://picsum.photos/1500/600?random=3" alt="Third Artist">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="dright-artist-box mt-5 mb-2">
+                <div class="row text-right">
+                {% if songs is defined %}
+                  {% for song in songs %}
+                    <div class="col-3 my-3">
+                      <a href="" class="fSong">
+                        <div class="card main-song-card">
+                          <img class="card-img-top img-fluid" src="{{ asset('images/' ~ song.thumbnail) }}"     alt="Card image cap">
+                          <div class="card-body">
+                            <div class="row align-items-center">
+                              <div class="col-2">
+                                {# <a href=""> #}
+                                  <i class="fa-solid fa-heart fa-xl like-songs"></i>
+                                {# </a> #}
+                              </div>
+                              <div class="col-10 song-details">
+                                <p class="card-text my-0">
+                                  <strong id="song-name">{{ song.title }}</strong>
+                                </p>
+                                <p class="card-text-sm text-end mb-0">{{ song.artist }}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  {% endfor %}
+                {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="player-container">
+    <div class="row align-items-center">
+      <div class="col-1 text-center px-0 py-0">
+        <i class="fa-solid fa-xmark fa-2xl"></i>
+      </div>
+      <div class="col-3 text-start px-0 py-0">
+        <div id="song-info">
+          <img src="" alt="Song Cover">
+          <div id="song-details">
+            <span id="song-titled">
+              <strong></strong>
+            </span>
+            <span id="artist"></span>
+          </div>
+        </div>
+      </div>
+      <div class="col-8">
+        <div class="song-buttons">
+          <input type="range" id="progress-bar" min="0" max="100" value="0">
+          <div id="controls">
+            <div id="play-button">
+              <i class="fa-solid fa-play fa-2xl"></i>
+            </div>
+          </div>
+        <audio id="audio-player" src=""></audio>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
