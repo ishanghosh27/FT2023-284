@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -448,6 +449,38 @@ class MainController extends AbstractController
         $file = $request->files->get('upload');
         $artist = $request->get('artist');
         $thumb = $request->files->get('thumb');
+        // Validate file upload
+        if (!$file instanceof UploadedFile) {
+            return $this->render('upload/upload.html.twig', [
+                'error' => 'Please upload an MP3 file.',
+            ]);
+        }
+        $allowedExtensions = ['mp3'];
+        $fileExtension = $file->getClientOriginalExtension();
+        if (!in_array($fileExtension, $allowedExtensions)) {
+            return $this->render('upload/upload.html.twig', [
+                'error' => 'Invalid file format. Only MP3 files are allowed.',
+            ]);
+        }
+        // Validate artist field
+        if (empty($artist)) {
+            return $this->render('upload/upload.html.twig', [
+                'error' => 'Artist field cannot be empty.',
+            ]);
+        }
+        // Validate thumbnail file upload
+        if (!$thumb instanceof UploadedFile) {
+            return $this->render('upload/upload.html.twig', [
+                'error' => 'Please upload an album art file (PNG, JPEG, or JPG).',
+            ]);
+        }
+        $thumbExtension = $thumb->getClientOriginalExtension();
+        if (!in_array($thumbExtension, ['png', 'jpeg', 'jpg'])) {
+            return $this->render('upload/upload.html.twig', [
+                'error' => 'Invalid album art file format. Only PNG, JPEG, and JPG files are allowed.',
+            ]);
+        }
+        // Move and save the files
         $name = $file->getClientOriginalName();
         $path = $this->getParameter('kernel.project_dir').'/public/audio';
         $file->move($path, $name);
@@ -458,8 +491,8 @@ class MainController extends AbstractController
         $uploadSong->setThumbnail($thumb->getClientOriginalName());
         $this->em->persist($uploadSong);
         $this->em->flush();
-        return $this->render('upload/upload.html.twig',[
-            'success' => 'Song Has Been Uploaded Successfully!'
+        return $this->render('upload/upload.html.twig', [
+            'success' => 'Song has been uploaded successfully!',
         ]);
     }
 

@@ -22,6 +22,13 @@
     </div>
   </div>
 {% endif %}
+{% if error is defined %}
+  <div class="alert alert-danger" role="alert">
+    <strong>
+      <p>{{ error }}</p>
+    </strong>
+  </div>
+{% endif %}
 <div class="login-logo text-center my-5 mx-auto">
   <a href="/dashboard">
     <i class="fa-brands fa-spotify fa-flip-vertical fa-3xl"></i>

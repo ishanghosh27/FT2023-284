@@ -166,3 +166,7 @@ hr {
 .fa-xmark:hover {
   color: #dc3545;
 }
+
+.dright-artist-box .fa-heart {
+  z-index: 10;
+}

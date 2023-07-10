@@ -5,13 +5,9 @@ $(document).ready(function() {
   $(".fSong").click(function(event) {
     event.preventDefault();
     var songTitle = $(this).find("#song-name").text();
-    console.log("songTitle:", songTitle);
     var songArtist = $(this).find(".card-text-sm").text();
-    console.log("songArtist:", songArtist);
     var songThumbnail = $(this).find(".card-img-top").attr("src");
-    console.log("songThumbnail:", songThumbnail);
     var songMp3 = "/audio/" + songTitle + ".mp3";
-    console.log("actual music", songMp3);
 
     $("#player-container").css("display", "block");
     $("#song-titled strong").text(songTitle);
